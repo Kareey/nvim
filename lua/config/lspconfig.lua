@@ -70,6 +70,20 @@ local opts = {
 				checkOnSave = {
 					command = "clippy"
 				},
+				assist={
+					importEnforceGranularity=true,
+					importPrefix=true,
+
+				},
+				cargo={
+				allFeatures=true
+				},
+				inlayHints={
+					lifetimeElisionHints={
+						enable=true,
+						useParameterNames=true
+					}
+				}
 			}
 		}
 	},

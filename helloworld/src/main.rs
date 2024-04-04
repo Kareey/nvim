@@ -1,5 +1,8 @@
 use std::io::stdin;
 
 fn main() {
-    let input = stdin();
+    let val =30;
+
+    println!("{}",val);
+
 }

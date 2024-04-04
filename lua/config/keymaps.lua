@@ -24,13 +24,7 @@ vim.keymap.set('n', '<leader>xq', function() require('trouble').toggle("quickfix
 vim.keymap.set('n', '<leader>gR', function() require('trouble').toggle("lsp_references") end, {})
 vim.keymap.set('n', '<leader>xl', function() require('trouble').toggle("loclist") end, {})
 vim.keymap.set('n', '<C-S>', '<C-c>:update<CR>', {})
-vim.keymap.set('n', '<C-e>', function()
-	if vim.bo.filetype == 'netrw' then
-		vim.cmd 'bwipeout'
-	else
-		vim.cmd 'Vexplore'
-	end
-end, { silent = true })
+vim.keymap.set('n', '<C-e>', ":NvimTreeToggle<CR>",{})
 
 vim.keymap.set('n','<Esc>',':q!<CR>',{})
 vim.keymap.set('n','<S-Esc>',':wq<CR>',{})

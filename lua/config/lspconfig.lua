@@ -50,7 +50,8 @@ local opts = {
 
 		-- whether the hover action window gets automatically focused
 		-- default: false
-		auto_focus = false,
+		auto_focus =true,
+
 	},
 	executor = require("rust-tools.executors").termopen,
 	-- all the opts to send to nvim-lspconfig
@@ -58,7 +59,13 @@ local opts = {
 	-- see https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
 	server = {
 		-- on_attach is a callback called when the language server attachs to the buffer
-		on_attach = lsp_status.on_attach,
+		on_attach =function(_,bufnr)
+
+		 vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+
+          	-- Code action groups
+          	vim.keymap.set("n", "<leader>a", rt.code_action_group.code_action_group(), { buffer = bufnr })
+		end,
 		standalone = false,
 		capabilities = lsp_status.capabilities,
 		settings = {
@@ -90,7 +97,7 @@ local opts = {
 	dap = {
 		adapter = {
 			type = "executable",
-			command = "lldb-vscode",
+			command = "/usr/bin/lldb",
 			name = "rt_lldb",
 		},
 	},

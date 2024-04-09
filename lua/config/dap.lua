@@ -1,24 +1,32 @@
 require('dapui').setup()
 local dap = require('dap')
+local mason_regisrtry = require('mason-registry')
+local codelldb_root = mason_regisrtry.get_package("codelldb"):get_install_path() .. "/extension/"
+local codelldb_path = codelldb_root .. "adapter/codelldb"
+local liblldb_path = codelldb_root .. "lldb/lib/liblldb.so"
+
 dap.adapters.codelldb = {
-	type = 'server',
+	type = "server",
 	port = 13000,
-	executable={
-		command="~/.local/share/nvim/mason/packages/codelldb/extension/adapter/codelldb",
-		args={"--port","13000"}
+	host = "127.0.0.1",
+	executable = {
+		command = codelldb_path,
+		args = {
+			"--liblldb", liblldb_path, "--port", "13000"
+		}
 
 	}
 }
 
-dap.configurations.rust={
-	{type="codelldb",
-	request='launch',
-	program="~.local/share/nvim/mason/packages/codelldb/extension/adapter/codelldb",
-	cwd='$(workspaceFolder)',
-	terminal="integrated",
-	sourceLanguages={"rust"}
+dap.configurations.codelldb = {
+	{
+		type = "codelldb",
+		request = 'launch',
+		program = "~/.vscode/extensions/vadimcn.vscode-lldb-1.10.0/lldb/bin/lldb",
+		terminal = "integrated",
+		sourceLanguages = { "rust" }
 
-}
+	}
 
 }
 

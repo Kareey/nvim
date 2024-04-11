@@ -6,6 +6,10 @@ vim.keymap.set("n", "<leader>ff", function()
 end
 
 , {})
+
+vim.keymap.set('n','<C-A-h>',function ()
+	require('telescope.builtin').lsp_incoming_calls()
+end)
 vim.keymap.set('n', '<leader>gf', function() require('telescope.builtin').git_files() end, {})
 vim.keymap.set('n', '<leader>gs',
 	function() require('telescope.builtin').grep_string({ search = vim.fn.input('Grep:') }) end,
@@ -24,10 +28,10 @@ vim.keymap.set('n', '<leader>xq', function() require('trouble').toggle("quickfix
 vim.keymap.set('n', '<leader>gR', function() require('trouble').toggle("lsp_references") end, {})
 vim.keymap.set('n', '<leader>xl', function() require('trouble').toggle("loclist") end, {})
 vim.keymap.set('n', '<C-S>', '<C-c>:update<CR>', {})
-vim.keymap.set('n', '<C-e>', ":NvimTreeToggle<CR>",{})
+vim.keymap.set('n', '<C-e>', ":NvimTreeToggle<CR>", {})
 
-vim.keymap.set('n','<Esc>',':q!<CR>',{})
-vim.keymap.set('n','<S-Esc>',':wq<CR>',{})
+vim.keymap.set('n', '<Esc>', ':q!<CR>', {})
+vim.keymap.set('n', '<S-Esc>', ':wq<CR>', {})
 
 
 
@@ -101,16 +105,18 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 vim.keymap.set('v', '<leader>p', "\"_dP")
 
 
-vim.keymap.set('n', '<F8>', ":lua require('dap').continue()<CR>",{})
-vim.keymap.set('n', '<leader>b', ":lua require('dap').toggle_breakpoint()<CR>",{})
-vim.keymap.set('n', '<F7>', ":lua require('dap').step_out()<CR>",{})
-vim.keymap.set('n', '<F6>', ":lua require('dap').step_into()<CR>",{})
-vim.keymap.set('n', '<leader>B', ":lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",{})
-vim.keymap.set('n', '<leader>lp', ":lua require('dap').set_breakpoint(nil,nil,vim.fn.input('Log point message: ')))<CR>",{})
+vim.keymap.set('n', '<F8>', ":lua require('dap').step_over()<CR>", { silent = true })
+vim.keymap.set('n', '<F10>', ":lua require('dap').continue()<CR>", { silent = true })
+vim.keymap.set('n', '<leader>b', ":lua require('dap').toggle_breakpoint()<CR>", { silent = true })
+vim.keymap.set('n', '<F7>', ":lua require('dap').step_out()<CR>", { silent = true })
+vim.keymap.set('n', '<F6>', ":lua require('dap').step_into()<CR>", { silent = true })
+vim.keymap.set('n', '<C-d>', function()
+	require('dapui').toggle()
+end, { silent = true })
+vim.keymap.set('n', '<leader>B', ":lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
+	{ silent = true })
+vim.keymap.set('n', '<leader>lp', ":lua require('dap').set_breakpoint(nil,nil,vim.fn.input('Log point message: ')))<CR>",
+	{ silent = true })
 
-vim.keymap.set('n', '<leader>dr', ":lua require('dap').repl.open()<CR>",{})
-vim.keymap.set('n', '<leader>dl', ":lua require('dap').step_into()<CR>",{})
-
-vim.keymap.set('n','<leader>ru',function ()
-	require('rust-tools').runnables.runnables()
-end)
+vim.keymap.set('n', '<leader>dr', ":lua require('dap').repl.open()<CR>", { silent = true })
+vim.keymap.set('n', '<leader>dl', ":lua require('dap').step_into()<CR>", { silent = true })

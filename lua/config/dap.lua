@@ -5,6 +5,7 @@ require('nvim-dap-virtual-text').setup({
 
 
 })
+
 local dap = require('dap')
 local mason_regisrtry = require('mason-registry')
 local codelldb_root = mason_regisrtry.get_package("codelldb"):get_install_path() .. "/extension/"

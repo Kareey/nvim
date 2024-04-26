@@ -1,7 +1,7 @@
 local rust_tools = {}
 
 function rust_tools.setup()
-	require("lazy").load({plugins="mason.nvim"})
+--	require("lazy").load({plugins="mason.nvim"})
 	local codelldb_root = "~/.local/share/nvim/mason/packages/codelldb/"
 	local codelldb_path = codelldb_root .. "adapter/codelldb"
 	local liblldb_path = codelldb_root .. "lldb/lib/liblldb.so"
@@ -34,7 +34,9 @@ function rust_tools.setup()
 					command = "clippy"
 				}
 
-			}
+			},
+			auto_attach=true,
+			standalone =false,
 
 		}
 

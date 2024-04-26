@@ -1,6 +1,6 @@
 return{
-	"tpope/vim-dadbod",
-	"kristijanhusak/vim-dadbod-ui",
-	"kristijanhusak/vim-dadbod-completion",
+	{"tpope/vim-dadbod",lazy=true},
+	{"kristijanhusak/vim-dadbod-ui",lazy=true},
+	{"kristijanhusak/vim-dadbod-completion",lazy=true},
 
 }

@@ -33,10 +33,15 @@ lspconfig.lua_ls.setup {
 	},
 }
 
+
 sign({ name = 'DiagnosticSignError', text = '' })
 sign({ name = 'DiagnosticSignWarn', text = '' })
 sign({ name = 'DiagnosticSignHint', text = '' })
 sign({ name = 'DiagnosticSignInfo', text = '' })
+sign({ name = 'DapToggleBreakPoint', text = '' })
+
+
+
 
 vim.diagnostic.config({
 	virtual_text = true,

@@ -8,20 +8,10 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 require("lazy").setup({
 spec={
         {"folke/trouble.nvim",opts={use_diagnostic_signs=true}},
-	{"rose-pine/neovim",name="rose-pine",
-	config=function()
-	  vim.cmd[[colorscheme rose-pine]]
-	  require("rose-pine").setup({
-           disable_background=true
-
-	  })
-	end
-
-},
+	{"stevearc/profile.nvim"},
 	{import="plugins"}
 	},
 checker={enabled=true},
 
 
 	})
-vim.cmd[[colorscheme rose-pine]]

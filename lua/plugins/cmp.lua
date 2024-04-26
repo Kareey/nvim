@@ -6,15 +6,15 @@ return {
 	'hrsh7th/cmp-cmdline',
 	'hrsh7th/cmp-nvim-lsp-signature-help',
 	'saadparwaiz1/cmp_luasnip',
-	'L3MON4D3/LuaSnip',
-	'nvim-lua/lsp-status.nvim',
-	{
-		'amrbashir/nvim-docs-view',
-		lazy = false,
-		cmd = "DocsviewToggle",
-		opts = {
-			position = "bottom",
-			width = 60
+	'L3MON4D3/LuaSnip', {
+	"amrbashir/nvim-docs-view",
+	opt = true,
+	cmd = { "DocsViewToggle" },
+	config = function()
+		require("docs-view").setup {
+			position = "right",
+			width = 60,
 		}
-	}
+	end
+}
 }

@@ -1,4 +1,4 @@
--- Keymaps are automatically loaded on the VeryLazy event
+--- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 vim.keymap.set("n", "<leader>ff", function()
@@ -7,7 +7,7 @@ end
 
 , {})
 
-vim.keymap.set('n','<C-A-h>',function ()
+vim.keymap.set('n', '<C-A-h>', function()
 	require('telescope.builtin').lsp_incoming_calls()
 end)
 vim.keymap.set('n', '<leader>gf', function() require('telescope.builtin').git_files() end, {})
@@ -27,15 +27,13 @@ vim.keymap.set('n', '<leader>xw', function() require('trouble').toggle("document
 vim.keymap.set('n', '<leader>xq', function() require('trouble').toggle("quickfix") end, {})
 vim.keymap.set('n', '<leader>gR', function() require('trouble').toggle("lsp_references") end, {})
 vim.keymap.set('n', '<leader>xl', function() require('trouble').toggle("loclist") end, {})
-vim.keymap.set('n', '<C-S>', '<C-c>:update<CR>', {})
-vim.keymap.set('n', '<C-e>', ":NvimTreeToggle<CR>", {})
-
+vim.keymap.set('n', '<C-S>', '<C-c>:update<CR>', { silent = true })
+vim.keymap.set('n','<C-e>',':NvimTreeToggle<CR>',{silent=true})
 vim.keymap.set('n', '<Esc>', ':q!<CR>', {})
 vim.keymap.set('n', '<S-Esc>', ':wq<CR>', {})
-vim.keymap.set('n', '<leader>tt',function ()
+vim.keymap.set('n', '<leader>tt', function()
 	require('toggleterm').toggle()
-	
-end,{})
+end, {})
 
 
 
@@ -124,37 +122,38 @@ vim.keymap.set('n', '<leader>lp', ":lua require('dap').set_breakpoint(nil,nil,vi
 vim.keymap.set('n', '<leader>dr', ":lua require('dap').repl.open()<CR>", { silent = true })
 vim.keymap.set('n', '<leader>dl', ":lua require('dap').step_into()<CR>", { silent = true })
 
-local harpoon= require('harpoon')
-vim.keymap.set('n','<leader>ha',function() harpoon:list():add() end)
-vim.keymap.set('n','<C-h>',function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
-vim.keymap.set('n','<C-P>',function() harpoon:list():prev() end)
-vim.keymap.set('n','<C-N>',function() harpoon:list():next() end)
+local harpoon = require('harpoon')
+vim.keymap.set('n', '<leader>ha', function() harpoon:list():add() end)
+vim.keymap.set('n', '<C-h>', function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+vim.keymap.set('n', '<C-P>', function() harpoon:list():prev() end)
+vim.keymap.set('n', '<C-N>', function() harpoon:list():next() end)
 
 
 
 
 local should_profile = os.getenv("NVIM_PROFILE")
 if should_profile then
-  require("profile").instrument_autocmds()
-  if should_profile:lower():match("^start") then
-    require("profile").start("*")
-  else
-    require("profile").instrument("*")
-  end
+	require("profile").instrument_autocmds()
+	if should_profile:lower():match("^start") then
+		require("profile").start("*")
+	else
+		require("profile").instrument("*")
+	end
 end
 
 local function toggle_profile()
-  local prof = require("profile")
-  if prof.is_recording() then
-    prof.stop()
-    vim.ui.input({ prompt = "Save profile to:", completion = "file", default = "profile.json" }, function(filename)
-      if filename then
-        prof.export(filename)
-        vim.notify(string.format("Wrote %s", filename))
-      end
-    end)
-  else
-    prof.start("*")
-  end
+	local prof = require("profile")
+	if prof.is_recording() then
+		prof.stop()
+		vim.ui.input({ prompt = "Save profile to:", completion = "file", default = "profile.json" },
+			function(filename)
+				if filename then
+					prof.export(filename)
+					vim.notify(string.format("Wrote %s", filename))
+				end
+			end)
+	else
+		prof.start("*")
+	end
 end
 vim.keymap.set("", "<f1>", toggle_profile)

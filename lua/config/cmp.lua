@@ -15,7 +15,6 @@ caps.workspace.didChangeWatchedFiles.dynamicRegistration = false
 
 
 local cmp = require 'cmp'
-
 cmp.setup({
 	snippet = {
 		-- REQUIRED - you must specify a snippet engine
@@ -43,7 +42,14 @@ cmp.setup({
 		['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 	}),
 	sources = cmp.config.sources({
-		{ name = 'nvim_lsp' },
+		{
+			name = 'nvim_lsp',
+			option = { keyword_pattern = [[\k+]] },
+			entry_filter = function(entry, ctx)
+				return require('cmp.types').lsp.CompletionItemKind[entry:get_kind()] ~= 'Text'
+			end,
+			max_item_count = 200
+		},
 		{ name = 'nvim_lsp_signature_help' },
 		{ name = 'luasnip' }
 		, { name = 'nvim_lua' }, -- For luasnip users.
@@ -51,16 +57,19 @@ cmp.setup({
 		-- { name = 'snippy' }, -- For snippy users.
 	}, {
 		{ name = 'buffer' },
-		{ name = 'path' },
+
 	}),
 
 	performance = {
-		throttle = 10,
-		async_budget = 10,
-		resolve_timeout = 10,
-		fetching_timeout = 10
+		trigger_debounce_time = 500,
+		throttle = 550,
+		async_budget = 100,
+		resolve_timeout = 100,
+		fetching_timeout = 80,
+		--max_view_entries = 100
 
-	}
+	},
+
 })
 
 -- Set configuration for specific filetype.

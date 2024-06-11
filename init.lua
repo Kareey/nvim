@@ -19,5 +19,5 @@ require("config.sonokai")
 require("config.lualine")
 
 vim.cmd([[
-colorscheme tokyonight-night
+colorscheme material
 ]])

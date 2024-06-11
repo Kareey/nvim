@@ -1,6 +1,5 @@
 local telescope = require('telescope')
 local lga_acts = require('telescope-live-grep-args.actions')
-telescope.load_extension('live_grep_args')
 
 telescope.setup({
 	extensions = {
@@ -13,6 +12,14 @@ telescope.setup({
 				}
 			},
 			search_dirs = { "/" }
+		},
+		fzf = {
+			fuzzy = true,
+			override_generic_sorter = true,
+			override_file_sorter=true,
+			case_mode = "smart_case"
+
+
 		}
 
 	}
@@ -20,6 +27,9 @@ telescope.setup({
 
 
 })
+
+telescope.load_extension('live_grep_args')
+telescope.load_extension('fzf')
 
 local harpoon = require('harpoon')
 harpoon:setup()
@@ -34,14 +44,14 @@ local function toggle_telescope(harpoon_files)
 	require('telescope.pickers').new({}, {
 		prompt_title = "Harpoon",
 		finder = require('telescope.finders').new_table({
-			results=file_paths
+			results = file_paths
 		}),
-		previewer=conf.file_previewer({}),
-		sorter=conf.generic_sorter({})
+		previewer = conf.file_previewer({}),
+		sorter = conf.generic_sorter({})
 	}):find()
 end
 
 
-vim.keymap.set('n','<C-S-e>',function ()
+vim.keymap.set('n', '<C-S-e>', function()
 	toggle_telescope(harpoon:list())
-end,{desc="Open harpoon window"})
+end, { desc = "Open harpoon window" })

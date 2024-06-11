@@ -1,9 +1,6 @@
 require('dapui').setup()
 require('nvim-dap-virtual-text').setup({
-	enabled =true,
-
-
-
+	enabled = true,
 })
 
 local dap = require('dap')
@@ -36,5 +33,4 @@ dap.configurations.codelldb = {
 	}
 
 }
-
 dap.set_log_level('ERROR')

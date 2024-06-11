@@ -9,7 +9,8 @@ vim.opt.completeopt = { 'menu', 'preview' }
 vim.opt.shortmess = vim.opt.shortmess + { c = true }
 vim.g.sonokai_style = "shusia"
 vim.g.sonokai_better_performance = 1
-vim.api.nvim_set_option('updatetime', 750)
+vim.g.material_style="darker"
+vim.api.nvim_set_option('updatetime',500)
 vim.opt.splitright = true
 vim.opt.autoindent = true
 vim.opt.lazyredraw=true

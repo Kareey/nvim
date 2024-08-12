@@ -1,17 +1,18 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  -- bootstrap lazy.nvim
-  -- stylua: ignore
-  vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath })
+	-- bootstrap lazy.nvim
+	-- stylua: ignore
+	vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable",
+		lazypath })
 end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 require("lazy").setup({
-spec={
-        {"folke/trouble.nvim",opts={use_diagnostic_signs=true}},
-	{"stevearc/profile.nvim"},
-	{import="plugins"}
+	spec = {
+		{ "folke/trouble.nvim",   opts = { use_diagnostic_signs = true } },
+		{ "stevearc/profile.nvim" },
+		{ import = "plugins" }
 	},
-checker={enabled=true},
+	checker = { enabled = true },
 
 
-	})
+})

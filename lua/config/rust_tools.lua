@@ -12,18 +12,23 @@ function rust_tools.setup()
 	vim.g.rustaceanvim = {
 		dap = {
 			adapter = cfg.get_codelldb_adapter(codelldb_path, liblldb_path),
-			autoload_configurations=false
+			autoload_configurations=true
 		},
 		inlay_hints = {
-			highlight = true
+			highlight = false
 		},
 		tools = {
 			hover_actions = {
-				auto_focus = true
+				auto_focus = false
+			},
+			reload_workspace_from_cargo_toml = true,
+			float_win_config= {
+				auto_focus =  true,
+				open_split = "horizontal"
 			}
 		},
 		runnables={
-			use_telescpope=true
+			use_telescpope=false
 		},
 		server = {
 			on_attach = function(client, bufnr)
@@ -46,5 +51,4 @@ function rust_tools.setup()
 
 	}
 end
-
 return rust_tools

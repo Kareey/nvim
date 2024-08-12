@@ -36,6 +36,9 @@ vim.keymap.set('n', '<leader>tt', function()
 end, {})
 
 
+vim.keymap.set('t',  '<ESC>'  ,  '<C-\\><C-n>'  ,  {noremap = true}  )
+
+
 
 
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -135,7 +138,7 @@ local should_profile = os.getenv("NVIM_PROFILE")
 if should_profile then
 	require("profile").instrument_autocmds()
 	if should_profile:lower():match("^start") then
-		require("profile").start("*")
+		require("profile").stat("*")
 	else
 		require("profile").instrument("*")
 	end

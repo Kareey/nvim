@@ -15,5 +15,4 @@ require("config.dap")
 require("config.nvimtree")
 require("config.lualine")
 require("config.cyberdream")
-
 vim.cmd('colorscheme cyberdream')

@@ -1,3 +1,13 @@
+local function setup_lsp_diags()
+	vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+		virtual_text = true,
+		signs = true,
+		update_in_insert = false,
+		underline = true
+	})
+end
+
+
 return {
 	{
 		"neovim/nvim-lspconfig",
@@ -9,19 +19,10 @@ return {
 	{
 		"mrcjkb/rustaceanvim",
 		dependencies = { "neovim/nvim-lspconfig", "lvimuser/lsp-inlayhints.nvim" },
-		config=function ()
+		config = function()
 			require("config.rust_tools").setup()
+			setup_lsp_diags()
 		end
 	},
-
-	{
-		"saecki/crates.nvim",
-		dependencies = { "mrcjkb/rustaceanvim" },
-		requires={"nvim-lua/plenary.nvim"},
-		config=function ()
-			require("crates").setup()
-		end
-	}
-
 
 }

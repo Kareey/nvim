@@ -9,7 +9,7 @@ vim.opt.completeopt = { 'menu', 'preview' }
 vim.opt.shortmess = vim.opt.shortmess + { c = true }
 vim.g.material_style="darker"
 vim.opt.splitright = true
-vim.opt.updatetime= 600
+vim.opt.updatetime= 500
 vim.opt.autoindent = true
 vim.opt.lazyredraw=true
 vim.opt.syntax="on"
@@ -17,7 +17,14 @@ vim.opt.background='dark'
 vim.opt.swapfile=false
 vim.opt.hlsearch=false
 vim.opt.incsearch=true
-vim.cmd([[
-set signcolumn=yes
-autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
-]])
+
+vim.opt.pumheight = 10 -- pop up menu height
+vim.opt.pumblend = 10
+vim.opt.smartindent= true
+vim.opt.splitbelow = true -- force all horizontal splits to go below current window
+vim.opt.splitright = true -- force all vertical splits to go to the right of current window
+vim.opt.swapfile= false
+vim.opt.termguicolors =true
+vim.opt.writebackup = false
+vim.opt.laststatus = 3
+vim.opt.signcolumn = "yes"

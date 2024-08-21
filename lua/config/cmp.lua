@@ -48,7 +48,7 @@ cmp.setup({
 			entry_filter = function(entry, ctx)
 				return require('cmp.types').lsp.CompletionItemKind[entry:get_kind()] ~= 'Text'
 			end,
-			max_item_count = 200
+			max_item_count = 100
 		},
 		{ name = 'nvim_lsp_signature_help' },
 		{ name = 'luasnip' }
@@ -61,11 +61,12 @@ cmp.setup({
 	}),
 
 	performance = {
-		trigger_debounce_time = 500,
-		throttle = 550,
-		async_budget = 100,
+		trigger_debounce_time = 200,
+		throttle = 350,
+		async_budget = 500,
 		resolve_timeout = 100,
-		fetching_timeout = 80,
+		fetching_timeout = 20,
+		confirm_resolve_timeout = 100,
 		--max_view_entries = 100
 
 	},

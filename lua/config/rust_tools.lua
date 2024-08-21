@@ -1,7 +1,6 @@
 local rust_tools = {}
-
 function rust_tools.setup()
---	require("lazy").load({plugins="mason.nvim"})
+	--	require("lazy").load({plugins="mason.nvim"})
 	local codelldb_root = "~/.local/share/nvim/mason/packages/codelldb/"
 	local codelldb_path = codelldb_root .. "adapter/codelldb"
 	local liblldb_path = codelldb_root .. "lldb/lib/liblldb.so"
@@ -12,36 +11,36 @@ function rust_tools.setup()
 	vim.g.rustaceanvim = {
 		dap = {
 			adapter = cfg.get_codelldb_adapter(codelldb_path, liblldb_path),
-			autoload_configurations=true
+			autoload_configurations = true
 		},
 		inlay_hints = {
-			highlight = false
+			highlight = true
 		},
 		tools = {
 			hover_actions = {
 				auto_focus = false
 			},
 			reload_workspace_from_cargo_toml = true,
-			float_win_config= {
-				auto_focus =  true,
+			float_win_config = {
+				auto_focus = true,
 				open_split = "horizontal"
 			}
 		},
-		runnables={
-			use_telescpope=false
+		runnables = {
+			use_telescpope = true
 		},
 		server = {
 			on_attach = function(client, bufnr)
-				vim.keymap.set("n","<C-space>",":RustLsp hover actions<CR>")
+				vim.keymap.set("n", "<C-space>", ":RustLsp hover actions<CR>", { silent = true })
 			end,
 			["rust-analyzer"] = {
 				checkOnSave = {
-					command = "clippy"
-				}
+					command = "check"
+				},
 
 			},
-			auto_attach=true,
-			standalone =false,
+			auto_attach = true,
+			standalone = false,
 
 		}
 
@@ -51,4 +50,5 @@ function rust_tools.setup()
 
 	}
 end
+
 return rust_tools

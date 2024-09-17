@@ -26,7 +26,6 @@ require('winbar').setup({
         'lir',
         'Outline',
         'spectre_panel',
-        'toggleterm',
         'qf',
     }
 

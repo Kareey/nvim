@@ -8,7 +8,6 @@ end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 require("lazy").setup({
 	spec = {
-		{ "folke/trouble.nvim",   opts = { use_diagnostic_signs = true } },
 		{ "stevearc/profile.nvim" },
 		{ import = "plugins" }
 	},

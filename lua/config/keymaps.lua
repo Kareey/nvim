@@ -8,10 +8,11 @@ vim.keymap.set("n", "<leader>ff", function()
 end
 
 , {})
-
+vim.keymap.set({ 'n', 'v' }, "<S-d>", ":t.<CR>", { silent = true })
 vim.keymap.set('n', '<C-A-h>', function()
 	require('telescope.builtin').lsp_incoming_calls()
 end)
+vim.keymap.set('v', 'y', 'y`]');
 vim.keymap.set('n', '<leader>gf', function() require('telescope.builtin').git_files() end, {})
 vim.keymap.set('n', '<leader>gs',
 	function() require('telescope.builtin').grep_string({ search = vim.fn.input('Grep:') }) end,
@@ -23,11 +24,22 @@ vim.keymap.set('n', '<leader>co', function() require('telescope.builtin').colors
 vim.keymap.set('n', '<leader>la', function() require('telescope').extensions.live_grep_args.live_grep_args() end, {})
 vim.keymap.set('n', '<leader>tg', function() require('telescope.builtin').help_tags() end, {})
 vim.keymap.set('n', '<leader>fb', function() require('telescope.builtin').buffers() end, {})
-
+vim.keymap.set('n', 'gr', function() require('telescope.builtin').lsp_references() end, { desc = "LSP references" })
+vim.keymap.set('n', 'gd', function() require('telescope.builtin').lsp_definitions() end, { desc = "LSP definitions" })
+vim.keymap.set('n', 'ds', function() require('telescope.builtin').lsp_document_symbols() end,
+	{ desc = "LSP document symbols" })
+vim.keymap.set('n', 'gi', function() require('telescope.builtin').lsp_implementations() end, {
+	desc =
+	"LSP implementations"
+})
 vim.keymap.set('n', '<leader>qf', function() require('telescope.builtin').quickfixhistory() end, {})
-vim.keymap.set('n', '<leader>xx', function() require('trouble').toggle() end, {})
-vim.keymap.set('n', '<leader>xw', function() require('trouble').toggle("document_diagnostics") end, {})
-vim.keymap.set('n', '<leader>xq', function() require('trouble').toggle("quickfix") end, {})
+vim.keymap.set('n', '<leader>ws', function() require('telescope.builtin').lsp_workspace_symbols() end, {})
+
+
+vim.keymap.set("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<CR>",
+	{ desc = "document diagnostics on opened buffers" })
+vim.keymap.set("n", "<leader>gr", "<cmd>Trouble lsp_references toggle<CR>", { desc = "go to references" })
+vim.keymap.set('n', '<leader>qf', "<cmd>Trouble quickfix toggle<CR>", {})
 vim.keymap.set('n', '<leader>gR', function() require('trouble').toggle("lsp_references") end, {})
 vim.keymap.set('n', '<leader>xl', function() require('trouble').toggle("loclist") end, {})
 vim.keymap.set('n', '<C-S>', '<C-c>:update<CR>', { silent = true })
@@ -54,24 +66,16 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		-- See `:help vim.lsp.*` for documentation on any of the below functions
 		local opts = { buffer = ev.buf }
 		vim.keymap.set({ 'v', 'n' }, '<a-CR>', vim.lsp.buf.code_action, opts)
-		vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-		vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
 		vim.keymap.set('n', '<S-Q>', ':DocsViewToggle<CR>', {})
-		vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-		vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
 		vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
 		vim.keymap.set('n', '<space>wl', function()
 			print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 		end, opts)
 		vim.keymap.set('n', '<leader>td', vim.lsp.buf.type_definition, opts)
 		vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
-		vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-		vim.keymap.set('n', '<space>f', function()
-			vim.lsp.buf.format { async = true }
-		end, opts)
 	end,
 })
-
+local format_is_enabled = true
 vim.api.nvim_create_autocmd('LspAttach', {
 	group = vim.api.nvim_create_augroup('lsp-attach-format', { clear = true }),
 	-- This is where we attach the autoformatting for reasonable clients
@@ -79,27 +83,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		local client_id = args.data.client_id
 		local client = vim.lsp.get_client_by_id(client_id)
 		local bufnr = args.buf
-
-		if not client.server_capabilities.documentFormattingProvider then
-			return
+		if client ~= nil then
+			if not client.server_capabilities.documentFormattingProvider then
+				return
+			end
 		end
-		vim.api.nvim_create_autocmd('BufWritePre', {
-			group = 'lsp-attach-format',
-			buffer = bufnr,
-			callback = function()
-				if not format_is_enabled then
-					return
-				end
-				vim.lsp.buf.format {
-					async = true,
-					filter = function(c)
-						if not client == nil then
-							return c.id == client.id
-						end
-					end,
-				}
-			end,
-		})
 	end,
 })
 

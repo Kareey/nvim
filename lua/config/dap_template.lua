@@ -9,13 +9,13 @@ dap.adapters.lldb = {
 
 dap.configuration.rust = {
 	{
-	name="helloworld",
-	type="lldb",
-	request="launch",
-	program=function ()
-		return vim.fn.getcwd().."/target/debug/helloworld"
-	end,
-	cwd="${workspaceFolder}",
+		name = "helloworld",
+		type = "lldb",
+		request = "launch",
+		program = function()
+			return vim.fn.getcwd() .. "/target/debug/helloworld"
+		end,
+		cwd = "${workspaceFolder}",
 
 	}
 

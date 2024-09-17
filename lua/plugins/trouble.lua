@@ -1,4 +1,4 @@
 return {
-	"folke/trouble.nvim",depencencies={"nvim-tree/nvim-web-devicons"},
+	"folke/trouble.nvim", depencencies = { "nvim-tree/nvim-web-devicons" },
 
 }

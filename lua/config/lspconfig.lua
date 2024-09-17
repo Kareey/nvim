@@ -32,6 +32,7 @@ lspconfig.lua_ls.setup {
 
 	},
 }
+lspconfig.clangd.setup({})
 
 sign({ name = 'DiagnosticSignError', text = '' })
 sign({ name = 'DiagnosticSignWarn', text = '' })
@@ -40,6 +41,25 @@ sign({ name = 'DiagnosticSignInfo', text = '' })
 sign({ name = 'DapToggleBreakPoint', text = '' })
 
 
+local configs = require('lspconfig.configs')
+if not configs.awklsp then
+	configs.awklsp = {
+		default_config = {
+			cmd = { 'awk-language-server' },
+			filetypes = { 'awk' },
+			single_file_support = true,
+			handlers = {
+				['workspace/workspaceFolders'] = function()
+					return { {
+						uri = 'file://' .. vim.fn.getcwd(),
+						name = 'current_dir',
+					} }
+				end
+			}
+		},
+	}
+end
+lspconfig.awklsp.setup {}
 
 
 vim.diagnostic.config({

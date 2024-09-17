@@ -31,22 +31,18 @@ function rust_tools.setup()
 		},
 		server = {
 			on_attach = function(client, bufnr)
+				vim.lsp.inlay_hint.enable()
 				vim.keymap.set("n", "<C-space>", ":RustLsp hover actions<CR>", { silent = true })
 			end,
 			["rust-analyzer"] = {
 				checkOnSave = {
-					command = "check"
+					command = "clippy"
 				},
 
 			},
 			auto_attach = true,
-			standalone = false,
-
+			standalone = true,
 		}
-
-
-
-
 
 	}
 end

@@ -34,6 +34,15 @@ cmp.setup({
 			max_height = 100
 		},
 	},
+	sorting = {
+		comparators = {
+			cmp.config.compare.offset,
+			cmp.config.compare.exact,
+			cmp.config.compare.score,
+			cmp.config.compare.recently_used,
+			cmp.config.compare.kind,
+		},
+	},
 	mapping = cmp.mapping.preset.insert({
 		['<C-b>'] = cmp.mapping.scroll_docs(-4),
 		['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -55,21 +64,10 @@ cmp.setup({
 		, { name = 'nvim_lua' }, -- For luasnip users.
 		-- { name = 'ultisnips' }, -- For ultisnips users.
 		-- { name = 'snippy' }, -- For snippy users.
-	}, {
 		{ name = 'buffer' },
+		{ name = 'path' },
 
 	}),
-
-	performance = {
-		trigger_debounce_time = 200,
-		throttle = 350,
-		async_budget = 500,
-		resolve_timeout = 100,
-		fetching_timeout = 20,
-		confirm_resolve_timeout = 100,
-		--max_view_entries = 100
-
-	},
 
 })
 

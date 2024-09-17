@@ -18,7 +18,7 @@ return {
 	},
 	{
 		"mrcjkb/rustaceanvim",
-		dependencies = { "neovim/nvim-lspconfig", "lvimuser/lsp-inlayhints.nvim" },
+		dependencies = { "lvimuser/lsp-inlayhints.nvim" },
 		config = function()
 			require("config.rust_tools").setup()
 			setup_lsp_diags()

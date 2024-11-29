@@ -17,4 +17,6 @@ require("config.cyberdream")
 require("config.comment")
 require("config.nvim_webdevicons")
 require("config.toggleterm")
+require("config.lazygit")
 vim.cmd('colorscheme cyberdream')
+

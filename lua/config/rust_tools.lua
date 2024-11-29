@@ -1,6 +1,7 @@
 local rust_tools = {}
 function rust_tools.setup()
 	--	require("lazy").load({plugins="mason.nvim"})
+
 	local codelldb_root = "~/.local/share/nvim/mason/packages/codelldb/"
 	local codelldb_path = codelldb_root .. "adapter/codelldb"
 	local liblldb_path = codelldb_root .. "lldb/lib/liblldb.so"
@@ -24,10 +25,10 @@ function rust_tools.setup()
 			float_win_config = {
 				auto_focus = true,
 				open_split = "horizontal"
-			}
+			},
 		},
 		runnables = {
-			use_telescpope = true
+			use_telescpope = true,
 		},
 		server = {
 			on_attach = function(client, bufnr)
@@ -40,8 +41,9 @@ function rust_tools.setup()
 				},
 
 			},
+
 			auto_attach = true,
-			standalone = true,
+			standalone = false,
 		}
 
 	}

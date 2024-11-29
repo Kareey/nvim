@@ -52,6 +52,8 @@ end, {})
 
 
 
+
+
 vim.keymap.set('t', '<ESC>', '<C-\\><C-n>', { noremap = true })
 
 
@@ -153,3 +155,5 @@ local function toggle_profile()
 	end
 end
 vim.keymap.set("", "<f1>", toggle_profile)
+
+vim.api.nvim_set_keymap('n', '<leader>rr', ':w<CR>:lua require("rust-tools.runnables").runnables()<CR>', { noremap = true, silent =true}) 

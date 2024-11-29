@@ -35,19 +35,22 @@ require('trouble').setup({
 	auto_fold = false,
 	auto_jump = { "lsp_definitions" },
 	include_declaration = { "lsp_references", "lsp_implementations", "lsp_definitions" },
-	use_diagnostic_signs = false,
-  modes = {
-    test = {
-      mode = "diagnostics",
-      preview = {
-        type = "split",
-        relative = "win",
-        position = "right",
-        size = 0.3,
-      },
-    },
-  },
-
+	use_diagnostic_signs = true,
+	modes = {
+		preview_float = {
+			mode = "diagnostics",
+			preview = {
+				type = "float",
+				relative = "editor",
+				border = "rounded",
+				title = "Preview",
+				title_pos = "center",
+				position = { 0, -2 },
+				size = { width = 0.3, height = 0.3 },
+				zindex = 200,
+			},
+		},
+	},
 })
 
 local trouble = require("trouble")

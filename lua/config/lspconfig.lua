@@ -60,7 +60,7 @@ if not configs.awklsp then
 	}
 end
 lspconfig.awklsp.setup {}
-
+lspconfig.cmake.setup({})
 
 vim.diagnostic.config({
 	virtual_text = true,

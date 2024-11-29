@@ -8,7 +8,7 @@ vim.g.laststatus=2
 vim.opt.nu=true
 vim.opt.smartcase= true
 vim.opt.ignorecase=true
-vim.opt.completeopt = { 'menu', 'preview' }
+vim.opt.completeopt = { 'menu', 'preview','noselect','menuone' }
 vim.opt.shortmess = vim.opt.shortmess + { c = true }
 vim.g.material_style="darker"
 vim.opt.splitright = true

@@ -1,5 +1,11 @@
 local telescope = require('telescope')
 local lga_acts = require('telescope-live-grep-args.actions')
+local actions = require("telescope.actions")
+local open_with_trouble = require("trouble.sources.telescope").open
+
+-- Use this to add more results without clearing the trouble list
+local add_to_trouble = require("trouble.sources.telescope").add
+
 
 telescope.setup({
 	extensions = {
@@ -11,18 +17,23 @@ telescope.setup({
 					['<C-i>'] = lga_acts.quote_prompt({ promtps = "--iglob" }),
 				}
 			},
-			search_dirs = { "/" }
+			search_dirs = { vim.fn.getcwd() }
 		},
 		fzf = {
 			fuzzy = true,
 			override_generic_sorter = true,
 			override_file_sorter = true,
 			case_mode = "smart_case"
+		},
 
-
-		}
-
+		defaults = {
+			mappings = {
+				i = { ["<c-t>"] = open_with_trouble },
+				n = { ["<c-t>"] = open_with_trouble },
+			},
+		},
 	}
+
 
 
 

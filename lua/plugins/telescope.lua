@@ -7,6 +7,5 @@ return {
 	dependencies = { "plenary" },
 	branch = "0.1.x",
 	"nvim-telescope/telescope-live-grep-args.nvim",
-
-
 }
+

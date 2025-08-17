@@ -13,15 +13,14 @@ return {
 		"neovim/nvim-lspconfig",
 		dependencies = {
 			"williamboman/mason.nvim",
-			"williamboman/mason-lspconfig.nvim",
 		}
 	},
 	{
 		"mrcjkb/rustaceanvim",
 		dependencies = { "lvimuser/lsp-inlayhints.nvim" },
 		config = function()
-			require("config.rust_tools").setup()
-			setup_lsp_diags()
+			 require("config.rust_tools").setup()
+			-- setup_lsp_diags()
 		end
 	},
 

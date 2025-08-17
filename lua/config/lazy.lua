@@ -6,12 +6,15 @@ if not vim.loop.fs_stat(lazypath) then
 		lazypath })
 end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
-require("lazy").setup({
-	spec = {
+
+require('lazy').setup({
+	 {"nvim-treesitter/nvim-treesitter", branch = 'master', lazy = false, build = ":TSUpdate"},
+spec = {
 		{ "stevearc/profile.nvim" },
 		{ import = "plugins" }
 	},
 	checker = { enabled = true },
+
 
 
 })
